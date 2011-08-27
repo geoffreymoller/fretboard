@@ -15,6 +15,9 @@ modules.fretboard = class
             STRING_COLOR: '#000'
             NUM_INLAYS: 9
             FINGERING_RADIUS: 7
+            STROKE_COLOR: '#000'
+            FILL_COLOR: '#04a20f'
+            ROOT_FILL_COLOR: '#000'
 
         @Constants.FRETBOARD_WIDTH = @Constants.FRETBOARD_LENGTH / 10
         @Constants.FRET_DISTANCE = @Constants.FRETBOARD_LENGTH / @Constants.FRET_COUNT
@@ -59,11 +62,11 @@ modules.fretboard = class
                 if note in notes
                     coords = @fretboard[stringIndex][fretIndex]
                     circle = new paper.Path.Circle new paper.Point(coords[0] - @Constants.FRET_FINGERING_OFFSET, coords[1]), @Constants.FINGERING_RADIUS
-                    circle.strokeColor = 'black'
+                    circle.strokeColor = @Constants.STROKE_COLOR
                     if note is rootNote
-                        circle.fillColor = 'black'
+                        circle.fillColor = @Constants.ROOT_FILL_COLOR
                     else
-                        circle.fillColor = '#04a20f'
+                        circle.fillColor = @Constants.FILL_COLOR
 
         paper.view.draw
 
@@ -77,7 +80,7 @@ modules.fretboard = class
                 circle = paper.circle(xCoordinate - @Constants.FRET_FINGERING_OFFSET, yCoordinate, 9)
                 circle.attr fill: '#ccc'
                 if params and params.noteNames
-                    noteName = noteNames[yIndex][xIndex - 1] #TODO - why  - 1
+                    noteName = noteNames[yIndex][xIndex - 1]
                     t = paper.text(xCoordinate - @Constants.FRET_FINGERING_OFFSET, yCoordinate, noteName)
                     t.attr 'font-size': 8
                     t.attr 'font-weight': 'bold'
