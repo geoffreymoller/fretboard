@@ -35,6 +35,7 @@ class fb
           scale: (key, mode) ->
 
             @bindModes()
+            @bindRoots()
 
             key = key || 'C'
             key = key.toUpperCase()
@@ -66,12 +67,22 @@ class fb
 
           bindModes: ->
             html = $ '<div></div>'
-            append = (key) ->
-                node = "<option value='#{key}'>#{key}</option>"
+            append = (mode) ->
+                node = "<option value='#{mode}'>#{mode}</option>"
                 html.append $(node)
             modes = model.modes
-            append key for key of modes
+            append mode for mode of modes
             $('#modes').append html.children() #TODO - why is @modes not seeing 'append'?
+
+          bindRoots: ->
+            html = $ '<div></div>'
+            roots = model.baseScale
+            append = (key) ->
+                key = roots[key]
+                node = "<option value='#{key}'>#{key}</option>"
+                html.append $(node)
+            append root for root of roots
+            $('#root').append html.children() #TODO - why is @root not seeing 'append'?
 
           keyDown: (e, view) =>
             modifierKey = e.altKey or e.metaKey or e.ctrlKey
@@ -81,7 +92,7 @@ class fb
                    view.arrowHandler(code)
                else
                    letter = String.fromCharCode code
-                   view.keyHandler(letter)
+                   view.letterHandler(letter)
 
           modelChange: (e) ->
             key = @scale.get('key')
@@ -168,7 +179,7 @@ class fb
                         @model.set 'mode': @keyMap.modes[modeIndex - 1]
                     return false
 
-            keyHandler: (letter) ->
+            letterHandler: (letter) ->
                 if letter in @keyMap.keys
                     key = letter.toUpperCase()
                     @model.set 'key': key

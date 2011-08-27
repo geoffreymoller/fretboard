@@ -39,7 +39,7 @@ modules.fretboard = class
         @
 
     drawScale: (rootNote, mode) ->
-        baseScale =  model.baseScale
+        baseScale = model.baseScale
         rootPosition = $.inArray(rootNote, baseScale)
         baseScale = baseScale[rootPosition..].concat(baseScale[0..rootPosition-1])
         intervals = model.modes[mode].intervals
