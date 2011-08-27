@@ -1,9 +1,9 @@
 noscript
     div.alert-message.error This application requires Javascript to be enabled
+h1 Fretboard Visualizer
 .container-fluid
     .sidebar
         form(id="fretboard", autocomplete="off")
-            h1 Fretboard
             select(id="modes")
                 option(value="ionian", selected="selected") ionian
                 option(value="dorian", selected="selected") dorian
@@ -20,11 +20,19 @@ noscript
                 option(value="E") E
                 option(value="F") F
                 option(value="G") G
-            p Instructional text:  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempor, tellus scelerisque blandit vehicula, massa risus hendrerit sem, ac commodo ligula nisl nec dui. Suspendisse potenti. 
+            h5#shortcuts Keyboard Shortcuts
+            p Change key via key letter or left/right arrow keys
+            p Change mode via up/down arrow keys or: 
+            ul
+                li (i)onian
+                li do(r)ian
+                li (p)hrygian
+                li (l)ydian
+                li (m)ixolydian
+                li (a)eolian
+                li locria(n)
 
-            p nec nisl id leo pharetra interdum. Donec tempus iaculis neque eget sagittis. Nullam est ante, feugiat eu aliquam quis, facilisis eu velit. Cras ullamcorper, nulla nec commodo malesuada, augue odio tempor lacus
     .content
-
         h2
             span#contextMode
             \:&nbsp;
