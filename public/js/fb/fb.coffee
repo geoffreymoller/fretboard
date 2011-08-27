@@ -17,8 +17,9 @@ class fb
 
           routes:
             "": "root"
-            "notes": "notes"
-            "notes/names": "noteNames"
+            #TODO - notes, noteNames
+            #"notes": "notes"
+            #"notes/names": "noteNames"
             "scale/:key/:mode": "scale"
 
           root: ->
@@ -55,9 +56,11 @@ class fb
 
           paintControls: (mode, key) ->
             @modes.val(mode)
-            @root.val(key.capitalize())
-            $('#contextMode').html(mode.capitalize())
-            $('#contextRoot').html(key.capitalize())
+            mode = mode.capitalize()
+            key = key.capitalize()
+            @root.val(key)
+            $('#contextMode').html("<a target='_blank' href='http://en.wikipedia.org/wiki/#{mode}_mode'>#{mode}</a>")
+            $('#contextRoot').html("<a target='_blank' href='http://en.wikipedia.org/wiki/Key_of_#{key}'>#{key}</a>")
 
           keyDown: (e, view) =>
             modifierKey = e.altKey or e.metaKey or e.ctrlKey
