@@ -39,10 +39,10 @@ modules.fretboard = class
         @
 
     drawScale: (rootNote, mode) ->
-        baseScale =  fb.model.board.baseScale
+        baseScale =  model.baseScale
         rootPosition = $.inArray(rootNote, baseScale)
         baseScale = baseScale[rootPosition..].concat(baseScale[0..rootPosition-1])
-        intervals = fb.model.modes[mode].intervals
+        intervals = model.modes[mode].intervals
         notes = []
         index = 0
         notes.push baseScale[0]
@@ -54,7 +54,7 @@ modules.fretboard = class
                 index += 1
             notes.push baseScale[index] if baseScale[index]
 
-        noteNames = fb.model.board.noteNames
+        noteNames = model.noteNames
         $.each noteNames, (stringIndex, string) =>
             $.each string, (fretIndex, fret) =>
                 note = noteNames[stringIndex][fretIndex]
@@ -74,7 +74,7 @@ modules.fretboard = class
     drawNotes: (params) ->
         x = @fretXCoords
         y = @stringYCoords
-        noteNames = fb.model.board.noteNames
+        noteNames = model.board.noteNames
         $.each y, (yIndex, yCoordinate) ->
             $.each x, (xIndex, xCoordinate) ->
                 circle = paper.circle(xCoordinate - @Constants.FRET_FINGERING_OFFSET, yCoordinate, 9)

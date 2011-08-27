@@ -34,6 +34,8 @@ class fb
 
           scale: (key, mode) ->
 
+            @bindModes()
+
             key = key || 'C'
             key = key.toUpperCase()
             mode = mode || 'ionian'
@@ -61,6 +63,15 @@ class fb
             @root.val(key)
             $('#contextMode').html("<a target='_blank' href='http://en.wikipedia.org/wiki/#{mode}_mode'>#{mode}</a>")
             $('#contextRoot').html("<a target='_blank' href='http://en.wikipedia.org/wiki/Key_of_#{key}'>#{key}</a>")
+
+          bindModes: ->
+            html = $ '<div></div>'
+            append = (key) ->
+                node = "<option value='#{key}'>#{key}</option>"
+                html.append $(node)
+            modes = model.modes
+            append key for key of modes
+            $('#modes').append html.children() #TODO - why is @modes not seeing 'append'?
 
           keyDown: (e, view) =>
             modifierKey = e.altKey or e.metaKey or e.ctrlKey

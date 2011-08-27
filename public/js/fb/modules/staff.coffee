@@ -11,7 +11,6 @@ modules.staff = class
 
         canvasNode =  $("#vexflowCanvas")
         if canvasNode.length
-            #TODO - can we instead 
             canvasNode.replaceWith @template.clone()
 
         @canvas = $("#vexflowCanvas")[0]
