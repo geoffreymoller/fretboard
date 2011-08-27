@@ -1,13 +1,8 @@
-fretboard README
+#Fretboard Mode Visualizer
 
-REFS:
-music js: http://code.gregjopa.com/javascript/audio/musicjs/demo/
-sound manager: http://www.schillmania.com/projects/soundmanager2/
+Displays the major scale along a 22-fret fretboard
 
-closure/bin/build/depswriter.py --root_with_prefix="fb ../../fb" --root_with_prefix="libs ../../libs" > deps.js
+Mode and key may be changed dynamically via dropdown or keyboard
 
-closure-library/closure/bin/build/closurebuilder.py \
-  --root=closure-library/ \
-    --root=myproject/ \
-      --namespace="myproject.start"
+
 
