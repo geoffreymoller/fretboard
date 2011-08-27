@@ -1,0 +1,41 @@
+noscript
+    div.alert-message.error This application requires Javascript to be enabled
+.container-fluid
+    .sidebar
+        form(id="fretboard", autocomplete="off")
+            h1 Fretboard
+            select(id="modes")
+                option(value="ionian", selected="selected") ionian
+                option(value="dorian", selected="selected") dorian
+                option(value="phrygian", selected="selected") phrygian
+                option(value="lydian", selected="selected") lydian
+                option(value="mixolydian", selected="selected") mixolydian
+                option(value="aeolian", selected="selected") aeolian
+                option(value="locrian", selected="selected") locrian
+            select(id="root")
+                option(value="A") A
+                option(value="B") B
+                option(value="C") C
+                option(value="D") D
+                option(value="E") E
+                option(value="F") F
+                option(value="G") G
+            p Instructional text:  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempor, tellus scelerisque blandit vehicula, massa risus hendrerit sem, ac commodo ligula nisl nec dui. Suspendisse potenti. 
+
+            p nec nisl id leo pharetra interdum. Donec tempus iaculis neque eget sagittis. Nullam est ante, feugiat eu aliquam quis, facilisis eu velit. Cras ullamcorper, nulla nec commodo malesuada, augue odio tempor lacus
+    .content
+
+        h2
+            span#contextMode
+            \:&nbsp;
+        h2
+            span#contextRoot
+
+        canvas(id="myCanvas", width="2000")
+        canvas(id="vexflowCanvas", width="2000")
+
+        script(src="js/fb-libs-compiled.js")
+        script(src="js/fb/fb.js")
+        script(src="js/fb/model.js")
+        script(src="js/fb/modules/fretboard.js")
+        script(src="js/fb/modules/staff.js")
