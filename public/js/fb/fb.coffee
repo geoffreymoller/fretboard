@@ -80,7 +80,7 @@ class fb
                 key = roots[key]
                 node = "<option value='#{key}'>#{key}</option>"
                 html.append $(node)
-            append root for root of roots
+            append root for own root of roots
             $('#root').append html.children() #TODO - why is @root not seeing 'append'?
 
           keyDown: (e, view) =>
@@ -123,15 +123,7 @@ class fb
 
             keyMap:
                 modes: (key for key, value of model.modes)
-                modeShortcuts: [
-                    'I'
-                    'R'
-                    'P'
-                    'L'
-                    'M'
-                    'O'
-                    'N'
-                ]
+                modeShortcuts: (value.shortcut for key, value of model.modes)
                 keys: model.baseScale
 
             arrowHandler: (code) ->

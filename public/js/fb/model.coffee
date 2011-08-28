@@ -9,18 +9,25 @@ h = 'half'
 model.modes =
     'ionian':
         intervals: [w,w,h,w,w,w,h]
+        shortcut: 'I'
     'dorian':
         intervals: [w,h,w,w,w,h,w]
+        shortcut: 'R'
     'phrygian':
         intervals: [h,w,w,w,h,w,w]
+        shortcut: 'P'
     'lydian':
         intervals: [w,w,w,h,w,w,h]
+        shortcut: 'L'
     'mixolydian':
         intervals: [w,w,h,w,w,h,w]
+        shortcut: 'M'
     'aeolian':
         intervals: [w,h,w,w,h,w,w]
+        shortcut: 'O'
     'locrian':
         intervals: [h,w,w,h,w,w,w]
+        shortcut: 'N'
 
 model.noteNames = [
     #TODO - generate fretboard programatically from tuning
