@@ -123,15 +123,7 @@ class fb
 
             keyMap:
                 modes: (key for key, value of model.modes)
-                modeShortcuts: [
-                    'I'
-                    'R'
-                    'P'
-                    'L'
-                    'M'
-                    'O'
-                    'N'
-                ]
+                modeShortcuts: (value.shortcut for key, value of model.modes)
                 keys: model.baseScale
 
             arrowHandler: (code) ->
