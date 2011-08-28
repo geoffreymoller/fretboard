@@ -105,7 +105,6 @@ modules.fretboard = class
             @fretXCoords.push xCoord
             xCoord += @Constants.FRET_DISTANCE
 
-    #TODO - clean up offsets
     drawFret: (xCoord) ->
         path = new paper.Path()
         path.strokeColor = @Constants.FRET_COLOR
@@ -128,7 +127,6 @@ modules.fretboard = class
         path.add new paper.Point 0, yCoord
         path.add new paper.Point @Constants.FRETBOARD_LENGTH + @Constants.FRET_STROKE_WIDTH, yCoord
 
-    #TODO - replace with calculated coords from fretXCoords
     drawInlays: ->
         xCoord = (@Constants.FRET_DISTANCE * 3) - (@Constants.FRET_DISTANCE / 2)
         $.each [1..@Constants.NUM_INLAYS], (index, indexValue) =>

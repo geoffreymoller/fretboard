@@ -123,15 +123,7 @@ class fb
                 @model.set key: key
 
             keyMap:
-                modes: [
-                    'ionian'
-                    'dorian'
-                    'phrygian'
-                    'lydian'
-                    'mixolydian'
-                    'aeolian'
-                    'locrian'
-                ]
+                modes: (key for key, value of model.modes)
                 modeShortcuts: [
                     'I'
                     'R'
