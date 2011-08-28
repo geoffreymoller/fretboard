@@ -80,7 +80,7 @@ class fb
                 key = roots[key]
                 node = "<option value='#{key}'>#{key}</option>"
                 html.append $(node)
-            append root for root of roots
+            append root for own root of roots
             $('#root').append html.children() #TODO - why is @root not seeing 'append'?
 
           keyDown: (e, view) =>
