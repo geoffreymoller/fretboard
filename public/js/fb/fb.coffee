@@ -137,16 +137,16 @@ class fb
             arrowHandler: (code) ->
                 key = @model.get 'key'
                 if code is 37
-                    if key.toUpperCase() is 'C'
-                        @model.set 'key': 'B'
+                    if key.toUpperCase() is @keyMap.keys[0]
+                        @model.set 'key': @keyMap.keys[@keyMap.keys.length - 1]
                     else
                         position = $.inArray(key, @keyMap.keys)
                         @model.set 'key': @keyMap.keys[position - 1]
                     return false
 
                 else if code is 39
-                    if key.toUpperCase() is 'B'
-                        @model.set 'key': 'C'
+                    if key.toUpperCase() is @keyMap.keys[@keyMap.keys.length - 1]
+                        @model.set 'key': @keyMap.keys[0]
                     else
                         position = $.inArray(key, @keyMap.keys)
                         @model.set 'key': @keyMap.keys[position + 1]
