@@ -44,11 +44,6 @@ class fb
             @scale = new Scale
             @scale.bind 'change', =>
                 @modelChange()
-            @scale.set(
-                { mode: mode, key: key }
-            )
-
-            @paintControls(mode, key)
 
             @view = new View
                 model: @scale
@@ -56,6 +51,10 @@ class fb
 
             $(document).keydown (e) =>
                 @keyDown(e, @view)
+
+            @scale.set(
+                { mode: mode, key: key }
+            )
 
           paintControls: (mode, key) ->
             @modes.val(mode)
@@ -133,21 +132,21 @@ class fb
                     'O'
                     'N'
                 ]
-                keys: ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+                keys: model.baseScale
 
             arrowHandler: (code) ->
                 key = @model.get 'key'
                 if code is 37
-                    if key.toUpperCase() is 'A'
-                        @model.set 'key': 'G'
+                    if key.toUpperCase() is 'C'
+                        @model.set 'key': 'B'
                     else
                         position = $.inArray(key, @keyMap.keys)
                         @model.set 'key': @keyMap.keys[position - 1]
                     return false
 
                 else if code is 39
-                    if key.toUpperCase() is 'G'
-                        @model.set 'key': 'A'
+                    if key.toUpperCase() is 'B'
+                        @model.set 'key': 'C'
                     else
                         position = $.inArray(key, @keyMap.keys)
                         @model.set 'key': @keyMap.keys[position + 1]
