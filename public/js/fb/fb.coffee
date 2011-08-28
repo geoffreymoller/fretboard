@@ -17,8 +17,9 @@ class fb
 
           routes:
             "": "root"
-            "notes": "notes"
-            "notes/names": "noteNames"
+            #TODO - notes, noteNames
+            #"notes": "notes"
+            #"notes/names": "noteNames"
             "scale/:key/:mode": "scale"
 
           root: ->
@@ -33,6 +34,9 @@ class fb
 
           scale: (key, mode) ->
 
+            @bindModes()
+            @bindRoots()
+
             key = key || 'C'
             key = key.toUpperCase()
             mode = mode || 'ionian'
@@ -40,11 +44,6 @@ class fb
             @scale = new Scale
             @scale.bind 'change', =>
                 @modelChange()
-            @scale.set(
-                { mode: mode, key: key }
-            )
-
-            @paintControls(mode, key)
 
             @view = new View
                 model: @scale
@@ -53,11 +52,36 @@ class fb
             $(document).keydown (e) =>
                 @keyDown(e, @view)
 
+            @scale.set(
+                { mode: mode, key: key }
+            )
+
           paintControls: (mode, key) ->
             @modes.val(mode)
-            @root.val(key.capitalize())
-            $('#contextMode').html(mode.capitalize())
-            $('#contextRoot').html(key.capitalize())
+            mode = mode.capitalize()
+            key = key.capitalize()
+            @root.val(key)
+            $('#contextMode').html("<a target='_blank' href='http://en.wikipedia.org/wiki/#{mode}_mode'>#{mode}</a>")
+            $('#contextRoot').html("<a target='_blank' href='http://en.wikipedia.org/wiki/Key_of_#{key}'>#{key}</a>")
+
+          bindModes: ->
+            html = $ '<div></div>'
+            append = (mode) ->
+                node = "<option value='#{mode}'>#{mode}</option>"
+                html.append $(node)
+            modes = model.modes
+            append mode for mode of modes
+            $('#modes').append html.children() #TODO - why is @modes not seeing 'append'?
+
+          bindRoots: ->
+            html = $ '<div></div>'
+            roots = model.baseScale
+            append = (key) ->
+                key = roots[key]
+                node = "<option value='#{key}'>#{key}</option>"
+                html.append $(node)
+            append root for root of roots
+            $('#root').append html.children() #TODO - why is @root not seeing 'append'?
 
           keyDown: (e, view) =>
             modifierKey = e.altKey or e.metaKey or e.ctrlKey
@@ -67,7 +91,7 @@ class fb
                    view.arrowHandler(code)
                else
                    letter = String.fromCharCode code
-                   view.keyHandler(letter)
+                   view.letterHandler(letter)
 
           modelChange: (e) ->
             key = @scale.get('key')
@@ -98,15 +122,7 @@ class fb
                 @model.set key: key
 
             keyMap:
-                modes: [
-                    'ionian'
-                    'dorian'
-                    'phrygian'
-                    'lydian'
-                    'mixolydian'
-                    'aeolian'
-                    'locrian'
-                ]
+                modes: (key for key, value of model.modes)
                 modeShortcuts: [
                     'I'
                     'R'
@@ -116,21 +132,21 @@ class fb
                     'O'
                     'N'
                 ]
-                keys: ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+                keys: model.baseScale
 
             arrowHandler: (code) ->
                 key = @model.get 'key'
                 if code is 37
-                    if key.toUpperCase() is 'A'
-                        @model.set 'key': 'G'
+                    if key.toUpperCase() is @keyMap.keys[0]
+                        @model.set 'key': @keyMap.keys[@keyMap.keys.length - 1]
                     else
                         position = $.inArray(key, @keyMap.keys)
                         @model.set 'key': @keyMap.keys[position - 1]
                     return false
 
                 else if code is 39
-                    if key.toUpperCase() is 'G'
-                        @model.set 'key': 'A'
+                    if key.toUpperCase() is @keyMap.keys[@keyMap.keys.length - 1]
+                        @model.set 'key': @keyMap.keys[0]
                     else
                         position = $.inArray(key, @keyMap.keys)
                         @model.set 'key': @keyMap.keys[position + 1]
@@ -154,7 +170,7 @@ class fb
                         @model.set 'mode': @keyMap.modes[modeIndex - 1]
                     return false
 
-            keyHandler: (letter) ->
+            letterHandler: (letter) ->
                 if letter in @keyMap.keys
                     key = letter.toUpperCase()
                     @model.set 'key': key

@@ -15,6 +15,9 @@ modules.fretboard = class
             STRING_COLOR: '#000'
             NUM_INLAYS: 9
             FINGERING_RADIUS: 7
+            STROKE_COLOR: '#000'
+            FILL_COLOR: '#04a20f'
+            ROOT_FILL_COLOR: '#000'
 
         @Constants.FRETBOARD_WIDTH = @Constants.FRETBOARD_LENGTH / 10
         @Constants.FRET_DISTANCE = @Constants.FRETBOARD_LENGTH / @Constants.FRET_COUNT
@@ -36,10 +39,10 @@ modules.fretboard = class
         @
 
     drawScale: (rootNote, mode) ->
-        baseScale =  fb.model.board.baseScale
+        baseScale = model.baseScale
         rootPosition = $.inArray(rootNote, baseScale)
         baseScale = baseScale[rootPosition..].concat(baseScale[0..rootPosition-1])
-        intervals = fb.model.modes[mode].intervals
+        intervals = model.modes[mode].intervals
         notes = []
         index = 0
         notes.push baseScale[0]
@@ -51,7 +54,7 @@ modules.fretboard = class
                 index += 1
             notes.push baseScale[index] if baseScale[index]
 
-        noteNames = fb.model.board.noteNames
+        noteNames = model.noteNames
         $.each noteNames, (stringIndex, string) =>
             $.each string, (fretIndex, fret) =>
                 note = noteNames[stringIndex][fretIndex]
@@ -59,11 +62,11 @@ modules.fretboard = class
                 if note in notes
                     coords = @fretboard[stringIndex][fretIndex]
                     circle = new paper.Path.Circle new paper.Point(coords[0] - @Constants.FRET_FINGERING_OFFSET, coords[1]), @Constants.FINGERING_RADIUS
-                    circle.strokeColor = 'black'
+                    circle.strokeColor = @Constants.STROKE_COLOR
                     if note is rootNote
-                        circle.fillColor = 'black'
+                        circle.fillColor = @Constants.ROOT_FILL_COLOR
                     else
-                        circle.fillColor = '#04a20f'
+                        circle.fillColor = @Constants.FILL_COLOR
 
         paper.view.draw
 
@@ -71,13 +74,13 @@ modules.fretboard = class
     drawNotes: (params) ->
         x = @fretXCoords
         y = @stringYCoords
-        noteNames = fb.model.board.noteNames
+        noteNames = model.board.noteNames
         $.each y, (yIndex, yCoordinate) ->
             $.each x, (xIndex, xCoordinate) ->
                 circle = paper.circle(xCoordinate - @Constants.FRET_FINGERING_OFFSET, yCoordinate, 9)
                 circle.attr fill: '#ccc'
                 if params and params.noteNames
-                    noteName = noteNames[yIndex][xIndex - 1] #TODO - why  - 1
+                    noteName = noteNames[yIndex][xIndex - 1]
                     t = paper.text(xCoordinate - @Constants.FRET_FINGERING_OFFSET, yCoordinate, noteName)
                     t.attr 'font-size': 8
                     t.attr 'font-weight': 'bold'
@@ -102,7 +105,6 @@ modules.fretboard = class
             @fretXCoords.push xCoord
             xCoord += @Constants.FRET_DISTANCE
 
-    #TODO - clean up offsets
     drawFret: (xCoord) ->
         path = new paper.Path()
         path.strokeColor = @Constants.FRET_COLOR
@@ -125,7 +127,6 @@ modules.fretboard = class
         path.add new paper.Point 0, yCoord
         path.add new paper.Point @Constants.FRETBOARD_LENGTH + @Constants.FRET_STROKE_WIDTH, yCoord
 
-    #TODO - replace with calculated coords from fretXCoords
     drawInlays: ->
         xCoord = (@Constants.FRET_DISTANCE * 3) - (@Constants.FRET_DISTANCE / 2)
         $.each [1..@Constants.NUM_INLAYS], (index, indexValue) =>

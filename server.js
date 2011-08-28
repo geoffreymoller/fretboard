@@ -25,18 +25,15 @@ app.configure('development', function(){
 });
 
 app.configure('production', function(){
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
-  //app.use(express.errorHandler()); 
+  app.use(express.errorHandler()); 
 });
 
 // Routes
-
 app.get('/', function(req, res){
   res.render('index', {
     title: 'Fretboard'
   });
 });
 
-app.use('/', express.errorHandler({ dump: true, stack: true }));
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

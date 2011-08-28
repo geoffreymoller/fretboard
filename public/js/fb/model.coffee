@@ -1,12 +1,12 @@
-goog.provide('fb.model.board')
+module 'model'
 
-fb.model.board.baseScale = [
+model.baseScale = [
     'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B'
 ]
 
 w = 'whole'
 h = 'half'
-fb.model.modes =
+model.modes =
     'ionian':
         intervals: [w,w,h,w,w,w,h]
     'dorian':
@@ -22,7 +22,7 @@ fb.model.modes =
     'locrian':
         intervals: [h,w,w,h,w,w,w]
 
-fb.model.board.noteNames = [
+model.noteNames = [
     #TODO - generate fretboard programatically from tuning
     [ 'E2', 'F2', 'F#2', 'G2', 'G#2', 'A2', 'Bb2', 'B2', 'C3', 'C#3', 'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'G#3', 'A3', 'Bb3', 'B3', 'C4', 'C#4', 'D4' ]
     [ 'A2', 'Bb2', 'B2', 'C3', 'C#3', 'D3', 'D#3', 'E3', 'F3', 'F#3', 'G3', 'G#3', 'A3', 'Bb3', 'B3', 'C4', 'C#4', 'D4', 'D#4', 'E4', 'F4', 'F#4', 'G4' ]
