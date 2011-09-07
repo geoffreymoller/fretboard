@@ -4,7 +4,7 @@ def srcDir = '..'
 def outputDir = 'target'
 def jshintConfig = 'jshint.json'
 def jshintOutput = outputDir + '/jshint.xml'
-def testDir = '../test'
+def testDir = 'test'
 def minifiedFilePath = "../${outputDir}/run_dev_server-min.js"
 
 repositories {
