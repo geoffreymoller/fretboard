@@ -58,11 +58,13 @@ class fb
 
           paintControls: (mode, key) ->
             @modes.val(mode)
+            chordFits = model.modes[mode].chordfits
             mode = mode.capitalize()
             key = key.capitalize()
             @root.val(key)
             $('#contextMode').html("<a target='_blank' href='http://en.wikipedia.org/wiki/#{mode}_mode'>#{mode}</a>")
             $('#contextRoot').html("<a target='_blank' href='http://en.wikipedia.org/wiki/Key_of_#{key}'>#{key}</a>")
+            $('#contextChordFits').html("Chord fit: #{chordFits}")
 
           bindModes: ->
             html = $ '<div></div>'
