@@ -30,7 +30,7 @@ class fb
             #"notes": "notes"
             #"notes/names": "noteNames"
             "scale/:key/:mode": "scale"
-            "chord": "chord"
+            "chord/:key/:string/:shape": "chord"
 
           root: ->
             @fretboard.init()
@@ -39,22 +39,19 @@ class fb
           notes: ->
             @fretboard.init().drawNotes()
 
-          chord: ->
+          chord: (key, string, shape) ->
             @pageName.set({name: 'chord'})
             do ->
-                console.time 'chords'
                 container = $("#container")
 
                 #shapes_E = [ "M E", "m E", "7 E", "m7 E", "M7 E", "m7b5 E", "dim E", "sus4 E", "7sus4 E", "13 E"]
                 #shapes_A = [ "M A", "m A", "7 A", "m7 A", "M7 A", "m7b5 A", "dim A", "sus2 A", "sus4 A", "7sus4 A", "9 A", "7b9 A", "7#9 A", "13 A"]
 
-                key = 'C'
-                string = 'E'
-                shape = 'm7b5 ' + string
+                key = key.toUpperCase()
+                string = string.toUpperCase()
+                shape = shape + ' ' + string
                 chord_elem = createChordElement(createChordStruct(key, string, shape))
                 container.append(chord_elem)
-
-                console.timeEnd 'chords'
 
 
           noteNames: (query, page) ->

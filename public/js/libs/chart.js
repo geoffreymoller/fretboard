@@ -276,10 +276,6 @@ positions = {
 };
 
 function createChordStruct(key, string, shape) {
-    console.log('key: ' + key);
-    console.log('string: ' + string);
-    console.log('shape: ' + shape);
-    console.log('');
   var string = string.toUpperCase();
   var position = positions[string][key];
   var struct = chord_shapes[shape];
