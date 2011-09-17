@@ -45,25 +45,15 @@ class fb
                 console.time 'chords'
                 container = $("#container")
 
-                #Display preset chords (open chords)
-                for chart in chord_chart
-                    section_struct = chart
-                    section = createSectionElement(section_struct)
+                #shapes_E = [ "M E", "m E", "7 E", "m7 E", "M7 E", "m7b5 E", "dim E", "sus4 E", "7sus4 E", "13 E"]
+                #shapes_A = [ "M A", "m A", "7 A", "m7 A", "M7 A", "m7b5 A", "dim A", "sus2 A", "sus4 A", "7sus4 A", "9 A", "7b9 A", "7#9 A", "13 A"]
 
-                    for chord in section_struct.chords
-                        section.append(createChordElement(chord))
+                key = 'C'
+                string = 'E'
+                shape = 'm7b5 ' + string
+                chord_elem = createChordElement(createChordStruct(key, string, shape))
+                container.append(chord_elem)
 
-                    container.append(section)
-
-                #Display shape chords for all keys
-                keys_E = ["F", "F#", "Gb", "G", "G#", "Ab", "A", "A#", "Bb", "C"]
-                #keys_A = ["C#", "Db", "D", "D#", "Eb", "F", "F#", "Gb", "G"]
-
-                shapes_E = [ "M E", "m E", "7 E", "m7 E", "M7 E", "m7b5 E", "dim E", "sus4 E", "7sus4 E", "13 E"]
-                shapes_A = [ "M A", "m A", "7 A", "m7 A", "M7 A", "m7b5 A", "dim A", "sus2 A", "sus4 A", "7sus4 A", "9 A", "7b9 A", "7#9 A", "13 A"]
-
-                createShapeChart(keys_E, container, shapes_E, "E")
-                #createShapeChart(keys_A, container, shapes_A, "A")
                 console.timeEnd 'chords'
 
 

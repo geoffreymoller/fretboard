@@ -276,6 +276,10 @@ positions = {
 };
 
 function createChordStruct(key, string, shape) {
+    console.log('key: ' + key);
+    console.log('string: ' + string);
+    console.log('shape: ' + shape);
+    console.log('');
   var string = string.toUpperCase();
   var position = positions[string][key];
   var struct = chord_shapes[shape];
@@ -324,16 +328,16 @@ function createSectionElement(section_struct) {
   return section;
 }
 
-function createShapeChart(keys, container, shapes, shape) {
+function createShapeChart(container, keys, shapes, string) {
   for (var i = 0; i < keys.length; ++i) {
     var key = keys[i];
     var section = createSectionElement({
-      section: key + " Chords (" + shape + " Shape)",
-      description: shape + "-Shaped barre chords in the key of " + key + "." });
+      section: key + " Chords (" + string + " Shape)",
+      description: string + "-Shaped barre chords in the key of " + key + "." });
 
     for (var j = 0; j < shapes.length; ++j) {
       var chord_elem = createChordElement(
-        createChordStruct(key, shape, shapes[j]));
+        createChordStruct(key, string, shapes[j]));
       section.append(chord_elem);
     }
 
