@@ -9,6 +9,16 @@ class fb
         Workspace = Backbone.Router.extend
 
           initialize: ->
+            console.log('initialize')
+            PageName = Backbone.Model.extend()
+            @pageName = new PageName
+            @pageName.bind 'change', (e) =>
+                name = @pageName.get('name')
+                $('body').removeClass().addClass(name)
+                $('ul.tabs').find('li')
+                .removeClass('active')
+                .filter('.' + name)
+                .addClass('active')
             @fretboard = new modules.fretboard
             @staff = new modules.staff
             @modes = $ '#modes'
@@ -21,6 +31,7 @@ class fb
             #"notes": "notes"
             #"notes/names": "noteNames"
             "scale/:key/:mode": "scale"
+            "chord": "chord"
 
           root: ->
             @fretboard.init()
@@ -29,11 +40,16 @@ class fb
           notes: ->
             @fretboard.init().drawNotes()
 
+          chord: ->
+            @pageName.set({name: 'chord'})
+
           noteNames: (query, page) ->
+            @pageName.set({name: 'noteNames'})
             @fretboard.init().drawNotes noteNames: true
 
           scale: (key, mode) ->
 
+            @pageName.set({name: 'mode'})
             @bindModes()
             @bindRoots()
 

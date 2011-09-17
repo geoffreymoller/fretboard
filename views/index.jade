@@ -3,12 +3,18 @@ noscript
 
 h1= title
 .container-fluid
+
     ul.tabs
-        li
-           a(href="#") Modes 
-        li.active
-           a(href="#") Chords 
-    .sidebar
+        li.mode
+           a(href="#scale/C/ionian") Modes 
+        li.chord
+           a(href="#chord") Chords 
+
+    .sidebar.chords chords sidebar
+
+    .content.chords chords content 
+
+    .sidebar.mode
         form(id="fretboard", autocomplete="off")
             select(id="modes")
             select(id="root")
@@ -24,7 +30,7 @@ h1= title
                 li ae(o)lian
                 li locria(n)
 
-    .content
+    .content.mode
         h2
             span#contextMode
             \:&nbsp;
