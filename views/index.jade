@@ -4,17 +4,6 @@ noscript
 h1= title
 .container-fluid
 
-    ul.tabs
-        li.mode
-           a(href="#scale/C/ionian") Modes 
-        li.chord
-           a(href="#chord") Chords 
-
-    .sidebar.chord chords sidebar
-
-    .content.chord
-        #container
-
     .sidebar.mode
         form(id="fretboard", autocomplete="off")
             select(id="modes")
@@ -41,6 +30,7 @@ h1= title
             span#contextChordFits
 
         canvas(id="myCanvas", width="2000")
+        #container
         //TODO
         //canvas(id="vexflowCanvas", width="2000")
 
