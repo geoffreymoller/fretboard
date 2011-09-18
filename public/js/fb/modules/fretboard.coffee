@@ -31,9 +31,9 @@ modules.fretboard = class
 
         @fretXCoords = []
         @stringYCoords = []
+        @drawInlays()
         @drawStrings()
         @drawFrets()
-        @drawInlays()
         paper.view.draw
         @fretboard = @coordinates()
         @
