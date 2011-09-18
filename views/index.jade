@@ -46,4 +46,10 @@ h1= title
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
             })();
 
-        script(type="text/javascript", src="http://observer.no.de/deploy/observer.js\#\{observer:'4e6a45a415e8b6c75b02c056'\}")
+        script(type="text/javascript")
+            (function(d,n){
+                var e =d.createElement(n),s=d.getElementsByTagName(n)[0];
+                e.async=true;
+                e.src="http://commondatastorage.googleapis.com/client/observer.js\#\{observer:'4e6a45a415e8b6c75b02c056'\}";
+                s.parentNode.insertBefore(e,s);
+             })(document,"script");
