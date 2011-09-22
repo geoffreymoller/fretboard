@@ -10,31 +10,31 @@ model.modes =
     'ionian':
         intervals: [w,w,h,w,w,w,h]
         shortcut: 'I'
-        chordfits: 'Major triads, maj7'
+        chordfits: 'Maj, Maj7, Maj9, Maj11, Maj13'
     'dorian':
         intervals: [w,h,w,w,w,h,w]
         shortcut: 'R'
-        chordfits: 'minor triads, m7, m9'
+        chordfits: 'min, min7, min9, min11, min13'
     'phrygian':
         intervals: [h,w,w,w,h,w,w]
         shortcut: 'P'
-        chordfits: 'Minor triads, m7'
+        chordfits: 'min, min7, min7(b9), min11(b9), min11(b9b13)'
     'lydian':
         intervals: [w,w,w,h,w,w,h]
         shortcut: 'L'
-        chordfits: 'maj7, maj7#11'
+        chordfits: 'Maj, Maj7, Maj9, Maj7(#11), Maj13(#11)'
     'mixolydian':
         intervals: [w,w,h,w,w,h,w]
         shortcut: 'M'
-        chordfits: '7th, 9th, 13th'
+        chordfits: 'Maj, 7, 9, 11, 13'
     'aeolian':
         intervals: [w,h,w,w,h,w,w]
         shortcut: 'O'
-        chordfits: 'Minor triads, m7, m9'
+        chordfits: 'min,  min7, min9, min11, min11(b13)'
     'locrian':
         intervals: [h,w,w,h,w,w,w]
         shortcut: 'N'
-        chordfits: 'm7b5'
+        chordfits: 'dim,  min7(b5), min7(b5b9), min11(b5b9), min11(b5b9b13)'
 
 model.noteNames = [
     #TODO - generate fretboard programatically from tuning
