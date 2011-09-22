@@ -26,11 +26,7 @@ class fb
 
           routes:
             "": "root"
-            #TODO - notes, noteNames
-            #"notes": "notes"
-            #"notes/names": "noteNames"
             "scale/:key/:mode": "scale"
-            "chord/:key/:string/:shape": "chord"
 
           root: ->
             @fretboard.init()
@@ -39,19 +35,27 @@ class fb
           notes: ->
             @fretboard.init().drawNotes()
 
-          chord: (key, string, shape) ->
-            @pageName.set({name: 'chord'})
-            do ->
-                container = $("#container")
+          paintChords: (key, mode) ->
 
-                #shapes_E = [ "M E", "m E", "7 E", "m7 E", "M7 E", "m7b5 E", "dim E", "sus4 E", "7sus4 E", "13 E"]
-                #shapes_A = [ "M A", "m A", "7 A", "m7 A", "M7 A", "m7b5 A", "dim A", "sus2 A", "sus4 A", "7sus4 A", "9 A", "7b9 A", "7#9 A", "13 A"]
+            container = $("#chords")
+            chordFits = model.modes[mode].chordfits
 
+            #shapes_E = [ "M E", "m E", "7 E", "m7 E", "M7 E", "m7b5 E", "dim E", "sus4 E", "7sus4 E", "13 E"]
+            #shapes_A = [ "M A", "m A", "7 A", "m7 A", "M7 A", "m7b5 A", "dim A", "sus2 A", "sus4 A", "7sus4 A", "9 A", "7b9 A", "7#9 A", "13 A"]
+
+            paintChord = (string) ->
+
+                shape = 'M'
                 key = key.toUpperCase()
+
                 string = string.toUpperCase()
                 shape = shape + ' ' + string
+
                 chord_elem = createChordElement(createChordStruct(key, string, shape))
                 container.append(chord_elem)
+
+            strings = ['a', 'e']
+            paintChord(string) for string in strings
 
 
           noteNames: (query, page) ->
@@ -59,6 +63,8 @@ class fb
             @fretboard.init().drawNotes noteNames: true
 
           scale: (key, mode) ->
+
+            console.time 'scale'
 
             @pageName.set({name: 'mode'})
             @bindModes()
@@ -71,6 +77,7 @@ class fb
             @scale = new Scale
             @scale.bind 'change', =>
                 @modelChange()
+                @paintChords(key, mode)
 
             @view = new View
                 model: @scale
@@ -82,6 +89,8 @@ class fb
             @scale.set(
                 { mode: mode, key: key }
             )
+
+            console.timeEnd 'scale'
 
           paintControls: (mode, key) ->
             @modes.val(mode)
