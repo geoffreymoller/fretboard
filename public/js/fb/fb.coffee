@@ -37,22 +37,35 @@ class fb
 
           paintChords: (key, mode) ->
 
-            container = $("#chords")
+            container = $("#chords").empty()
             chordFits = model.modes[mode].chordfits
+
+            #TODO - reconcile chordMap
+            chordMap =
+               Maj: 'M'
+               Maj7: 'M7'
+               min: 'm'
+               min7: 'm7'
+               7: '7'
+
+            #TODO - handle blank values in list comprehension
+            chordShapes = (chordMap[name] for name in chordFits)  #(chordMap[name] for name in chordFits if chordMap[name]
 
             #shapes_E = [ "M E", "m E", "7 E", "m7 E", "M7 E", "m7b5 E", "dim E", "sus4 E", "7sus4 E", "13 E"]
             #shapes_A = [ "M A", "m A", "7 A", "m7 A", "M7 A", "m7b5 A", "dim A", "sus2 A", "sus4 A", "7sus4 A", "9 A", "7b9 A", "7#9 A", "13 A"]
 
             paintChord = (string) ->
 
-                shape = 'M'
                 key = key.toUpperCase()
-
                 string = string.toUpperCase()
-                shape = shape + ' ' + string
 
-                chord_elem = createChordElement(createChordStruct(key, string, shape))
-                container.append(chord_elem)
+                for shape in chordShapes
+                    #TODO - handle blank values in list comprehension
+                    if not shape
+                        continue
+                    shape = shape + ' ' + string
+                    chord_elem = createChordElement(createChordStruct(key, string, shape))
+                    container.append(chord_elem)
 
             strings = ['a', 'e']
             paintChord(string) for string in strings
@@ -77,7 +90,7 @@ class fb
             @scale = new Scale
             @scale.bind 'change', =>
                 @modelChange()
-                @paintChords(key, mode)
+                @paintChords(@scale.get('key'), @scale.get('mode'))
 
             @view = new View
                 model: @scale
@@ -100,7 +113,7 @@ class fb
             @root.val(key)
             $('#contextMode').html("<a target='_blank' href='http://en.wikipedia.org/wiki/#{mode}_mode'>#{mode}</a>")
             $('#contextRoot').html("<a target='_blank' href='http://en.wikipedia.org/wiki/Key_of_#{key}'>#{key}</a>")
-            $('#contextChordFits').html("Chord fit: #{chordFits}")
+            $('#contextChordFits').html("Chord fit: #{chordFits.join(', ')}")
 
           bindModes: ->
             html = $ '<div></div>'
