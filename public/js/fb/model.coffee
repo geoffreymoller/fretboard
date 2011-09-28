@@ -4,6 +4,9 @@ model.baseScale = [
     'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'Bb', 'B'
 ]
 
+#shapes_E = [ "M E", "m E", "7 E", "m7 E", "M7 E", "m7b5 E", "dim E", "sus4 E", "7sus4 E", "13 E"]
+#shapes_A = [ "M A", "m A", "7 A", "m7 A", "M7 A", "m7b5 A", "dim A", "sus2 A", "sus4 A", "7sus4 A", "9 A", "7b9 A", "7#9 A", "13 A"]
+
 w = 'whole'
 h = 'half'
 model.modes =
@@ -34,7 +37,7 @@ model.modes =
     'locrian':
         intervals: [h,w,w,h,w,w,w]
         shortcut: 'N'
-        chordfits: ['dim',  'min7(b5)', 'min7(b5b9)', 'min11(b5b9)', 'min11(b5b9b13)']
+        chordfits: ['dim', 'min7(b5)', 'min7(b5b9)', 'min11(b5b9)', 'min11(b5b9b13)']
 
 model.noteNames = [
     #TODO - generate fretboard programatically from tuning

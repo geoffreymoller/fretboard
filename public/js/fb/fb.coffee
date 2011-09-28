@@ -51,6 +51,8 @@ class fb
                'min7': 'm7'
                '7': '7'
                '9': '9'
+               'dim': 'dim'
+               'min7(b5)': 'm7b5'
 
             chordShapes = []
             for name in chordFits
@@ -62,7 +64,7 @@ class fb
                 key = key.toUpperCase()
 
                 for shape in chordShapes
-                    for string in ['e', 'a']
+                    for string in ['a', 'e']
                         string = string.toUpperCase()
                         shapeName = shape + ' ' + string
                         if chord_shapes[shapeName]
