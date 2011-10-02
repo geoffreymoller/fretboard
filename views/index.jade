@@ -3,7 +3,8 @@ noscript
 
 h1= title
 .container-fluid
-    .sidebar
+
+    .sidebar.mode
         form(id="fretboard", autocomplete="off")
             select(id="modes")
             select(id="root")
@@ -19,16 +20,21 @@ h1= title
                 li ae(o)lian
                 li locria(n)
 
-    .content
-        h2
-            span#contextMode
-            \:&nbsp;
-        h2
-            span#contextRoot
-        h3
-            span#contextChordFits
+    .content.mode
+        div#context
+            h2
+                span#contextMode
+                \:&nbsp;
+            h2
+                span#contextRoot
 
         canvas(id="myCanvas", width="2000")
+
+        h3
+            span#contextChordFits
+    
+        div#chords
+
         //TODO
         //canvas(id="vexflowCanvas", width="2000")
 
