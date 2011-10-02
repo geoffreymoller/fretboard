@@ -81,8 +81,6 @@ class fb
 
           scale: (key, mode) ->
 
-            console.time 'scale'
-
             @pageName.set({name: 'mode'})
             @bindModes()
             @bindRoots()
@@ -106,8 +104,6 @@ class fb
             @scale.set(
                 { mode: mode, key: key }
             )
-
-            console.timeEnd 'scale'
 
           paintControls: (mode, key) ->
             @modes.val(mode)
