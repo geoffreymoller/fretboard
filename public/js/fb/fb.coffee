@@ -114,7 +114,7 @@ class fb
             @root.val(key)
             $('#contextMode').html("<a target='_blank' href='http://en.wikipedia.org/wiki/#{mode}_mode'>#{mode}</a>")
             $('#contextRoot').html("<a target='_blank' href='http://en.wikipedia.org/wiki/Key_of_#{key}'>#{key}</a>")
-            $('#contextChordFits').html("Chord fits: #{chordFits.join(', ')}")
+            $('#contextChordFits').html("Chord fits: #{chordFits.join(', ')} <span id='chordsComing'>&raquo; more chords forthcoming</span>")
 
           bindModes: ->
             html = $ '<div></div>'
