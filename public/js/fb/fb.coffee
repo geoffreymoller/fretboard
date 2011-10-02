@@ -9,6 +9,15 @@ class fb
         Workspace = Backbone.Router.extend
 
           initialize: ->
+            PageName = Backbone.Model.extend()
+            @pageName = new PageName
+            @pageName.bind 'change', (e) =>
+                name = @pageName.get('name')
+                $('body').removeClass().addClass(name)
+                $('ul.tabs').find('li')
+                .removeClass('active')
+                .filter('.' + name)
+                .addClass('active')
             @fretboard = new modules.fretboard
             @staff = new modules.staff
             @modes = $ '#modes'
@@ -17,9 +26,6 @@ class fb
 
           routes:
             "": "root"
-            #TODO - notes, noteNames
-            #"notes": "notes"
-            #"notes/names": "noteNames"
             "scale/:key/:mode": "scale"
 
           root: ->
@@ -29,11 +35,55 @@ class fb
           notes: ->
             @fretboard.init().drawNotes()
 
+          paintChords: (key, mode) ->
+
+            container = $("#chords").empty()
+            chordFits = model.modes[mode].chordfits
+
+            #TODO - reconcile chordMap
+            #shapes_E = [ "M E", "m E", "7 E", "m7 E", "M7 E", "m7b5 E", "dim E", "sus4 E", "7sus4 E", "13 E"]
+            #shapes_A = [ "M A", "m A", "7 A", "m7 A", "M7 A", "m7b5 A", "dim A", "sus2 A", "sus4 A", "7sus4 A", "9 A", "7b9 A", "7#9 A", "13 A"]
+
+            @chordMap =
+               'Maj': 'M'
+               'Maj7': 'M7'
+               'min': 'm'
+               'min7': 'm7'
+               '7': '7'
+               '9': '9'
+               'dim': 'dim'
+               'min7(b5)': 'm7b5'
+
+            @availableChords = []
+
+            chordShapes = []
+            for name in chordFits
+                if @chordMap[name]
+                    chordShapes.push @chordMap[name]
+
+            do =>
+
+                key = key.toUpperCase()
+
+                for shape in chordShapes
+                    for string in ['a', 'e']
+                        string = string.toUpperCase()
+                        shapeName = shape + ' ' + string
+                        if chord_shapes[shapeName]
+                            @availableChords.push(shape) if shape not in @availableChords
+                            chord_elem = createChordElement(createChordStruct(key, string, shapeName))
+                            container.append(chord_elem)
+
+
           noteNames: (query, page) ->
+            @pageName.set({name: 'noteNames'})
             @fretboard.init().drawNotes noteNames: true
 
           scale: (key, mode) ->
 
+            console.time 'scale'
+
+            @pageName.set({name: 'mode'})
             @bindModes()
             @bindRoots()
 
@@ -43,6 +93,7 @@ class fb
 
             @scale = new Scale
             @scale.bind 'change', =>
+                @paintChords(@scale.get('key'), @scale.get('mode'))
                 @modelChange()
 
             @view = new View
@@ -56,15 +107,28 @@ class fb
                 { mode: mode, key: key }
             )
 
+            console.timeEnd 'scale'
+
           paintControls: (mode, key) ->
             @modes.val(mode)
             chordFits = model.modes[mode].chordfits
+            chordFitHTML = ''
+            generateChordFitHTML = (chordFit) =>
+                if @chordMap[chordFit]
+                    chordFitHTML += "<span class='provided'>#{chordFit}</span>, "
+                    return true
+                else
+                    chordFitHTML += "<span class='pending'>#{chordFit}</span>, "
+                    return false
+            generateChordFitHTML(chordFit) for chordFit in chordFits
+            chordFitHTML = chordFitHTML.slice(0, chordFitHTML.length - 2)
+
             mode = mode.capitalize()
             key = key.capitalize()
             @root.val(key)
             $('#contextMode').html("<a target='_blank' href='http://en.wikipedia.org/wiki/#{mode}_mode'>#{mode}</a>")
             $('#contextRoot').html("<a target='_blank' href='http://en.wikipedia.org/wiki/Key_of_#{key}'>#{key}</a>")
-            $('#contextChordFits').html("Chord fit: #{chordFits}")
+            $('#contextChordFits').html("Chord fits: #{chordFitHTML} <span id='chordsComing'>&raquo; more chords forthcoming</span>")
 
           bindModes: ->
             html = $ '<div></div>'

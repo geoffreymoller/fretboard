@@ -10,14 +10,37 @@
 
 body {
 
+    .sidebar, .content {
+        display: none;
+    }
+
+    &.mode {
+        .mode {
+            display: block;
+        }
+    }
+
+    &.chord {
+        .sidebar.chord, .content.chord {
+            display: block;
+        }
+
+        .content.chord {
+            .chord { float: left; padding-top: 8px;}
+            .chordname {
+              width: 80%;
+              margin: auto;
+              font-family: "Marvel", cursive;
+              font-size: 20px;
+              text-align: center;
+            }
+        }
+    }
+
     padding: 10px 20px;
 
     h1 {
         margin: 0;
-    }
-
-    canvas {
-        margin-bottom: 20px;
     }
 
     div.container-fluid{
@@ -28,14 +51,37 @@ body {
                 color: #000;
                 font-weight: bold;
             }
+            #context {
+                border-bottom: 1px solid #ccc;
+                margin-bottom: 20px;
+                width: 1100px;
+            }
             h2 {
                 display: inline-block;
             }
             h3 {
                 border-top: 1px solid #ccc;
                 border-bottom: 1px solid #ccc;
-                margin-bottom: 20px;
-                width: 270px;
+                display: inline-block;
+                width: 1100px;
+            }
+
+            #contextChordFits {
+                .pending {
+                    color: #cccccc;
+                }
+            }
+            #chordsComing {
+                color: #cccccc;
+                font-size: 12px;
+                font-style: italic;
+                font-weight: normal;
+                margin-left: 10px;
+            }
+            #chords {
+                .chord {
+                    display: inline-block;
+                }
             }
         }
 

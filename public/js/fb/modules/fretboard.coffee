@@ -31,9 +31,9 @@ modules.fretboard = class
 
         @fretXCoords = []
         @stringYCoords = []
+        @drawInlays()
         @drawStrings()
         @drawFrets()
-        @drawInlays()
         paper.view.draw
         @fretboard = @coordinates()
         @
@@ -130,9 +130,16 @@ modules.fretboard = class
     drawInlays: ->
         xCoord = (@Constants.FRET_DISTANCE * 3) - (@Constants.FRET_DISTANCE / 2)
         $.each [1..@Constants.NUM_INLAYS], (index, indexValue) =>
-            circle = new paper.Path.Circle(new paper.Point(xCoord, (@Constants.FRETBOARD_WIDTH / 2) + @Constants.CANVAS_OFFSET ), @Constants.INLAY_RADIUS)
-            circle.fillColor = 'grey'
-            circle.strokeColor = 'black'
+            #TODO - tighten this up
+            if index is 4
+                circle1 = new paper.Path.Circle(new paper.Point(xCoord, (@Constants.FRETBOARD_WIDTH / 2) + @Constants.CANVAS_OFFSET - @Constants.STRING_MARGIN*1.5), @Constants.INLAY_RADIUS)
+                circle2 = new paper.Path.Circle(new paper.Point(xCoord, (@Constants.FRETBOARD_WIDTH / 2) + @Constants.CANVAS_OFFSET + @Constants.STRING_MARGIN*1.5), @Constants.INLAY_RADIUS)
+                circle1.fillColor = circle2.fillColor = 'grey'
+                circle1.strokeColor = circle2.strokeColor = 'black'
+            else
+                circle = new paper.Path.Circle(new paper.Point(xCoord, (@Constants.FRETBOARD_WIDTH / 2) + @Constants.CANVAS_OFFSET ), @Constants.INLAY_RADIUS)
+                circle.fillColor = 'grey'
+                circle.strokeColor = 'black'
             if index is 3 or index is 4
                 xCoord += @Constants.FRET_DISTANCE * 3
             else
