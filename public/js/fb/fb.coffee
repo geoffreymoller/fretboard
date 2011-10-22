@@ -4,7 +4,7 @@ window.module = (name) ->
 
 class fb
 
-    main: ->
+    constructor: ->
 
         Workspace = Backbone.Router.extend
 
@@ -238,7 +238,6 @@ class fb
 
 $('document').ready ->
     fretboard = new fb
-    fretboard.main()
 
 String.prototype.capitalize = ->
       return this.charAt(0).toUpperCase() + this.substring(1).toLowerCase()
