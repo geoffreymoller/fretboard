@@ -22,7 +22,7 @@ app.configure(function(){
 });
 
 app.configure('development', function(){
-  port = 4000;
+  port = process.env.PORT || 4000;
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
 });
 
