@@ -1,0 +1,89 @@
+.shadow {
+  -moz-box-shadow: 3px 3px 3px #ccc;
+  -webkit-box-shadow: 3px 3px 3px #ccc;
+  box-shadow: 3px 3px 3px #ccc;
+}
+.capitalize {
+  text-transform: capitalize;
+}
+body {
+  padding: 10px 20px;
+}
+body .sidebar,
+body .content {
+  display: none;
+}
+body.mode .mode {
+  display: block;
+}
+body.chord .sidebar.chord,
+body.chord .content.chord {
+  display: block;
+}
+body.chord .content.chord .chord {
+  float: left;
+  padding-top: 8px;
+}
+body.chord .content.chord .chordname {
+  width: 80%;
+  margin: auto;
+  font-family: "Marvel", cursive;
+  font-size: 20px;
+  text-align: center;
+}
+body h1 {
+  margin: 0;
+}
+body div.container-fluid div.content {
+  margin-left: 180px;
+}
+body div.container-fluid div.content a {
+  color: #000;
+  font-weight: bold;
+}
+body div.container-fluid div.content #context {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
+  width: 1100px;
+}
+body div.container-fluid div.content h2 {
+  display: inline-block;
+}
+body div.container-fluid div.content h3 {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  display: inline-block;
+  width: 1100px;
+}
+body div.container-fluid div.content #contextChordFits .pending {
+  color: #cccccc;
+}
+body div.container-fluid div.content #chordsComing {
+  color: #cccccc;
+  font-size: 12px;
+  font-style: italic;
+  font-weight: normal;
+  margin-left: 10px;
+}
+body div.container-fluid div.content #chords .chord {
+  display: inline-block;
+}
+body div.container-fluid div.sidebar {
+  margin-top: 10px;
+  width: 150px;
+}
+body div.container-fluid div.sidebar #shortcuts {
+  margin-top: 15px;
+}
+body div.container-fluid div.sidebar p,
+body div.container-fluid div.sidebar li {
+  font-size: 11px;
+  margin-bottom: 6px;
+}
+body div.container-fluid div.sidebar select {
+  margin-bottom: 5px;
+  width: 150px;
+}
+body a {
+  color: #00B7FF;
+}

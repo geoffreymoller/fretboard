@@ -7,6 +7,5 @@ node_modules
 compiler-latest
 bootstrap.js
 build.js
-*.css
 README.html
 target
